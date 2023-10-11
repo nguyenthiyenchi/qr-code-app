@@ -7,8 +7,10 @@ An easy-to-use app to help you to generate and save qr code.
 ## Table of Contents
 
 - [Installation](#installation)
+- [Usage](#usage)
+- [Demo](#demo)
 
-## Installation
+## Installation 🎵
 
 1. First, clone this repository to your local machine:
 
@@ -30,3 +32,9 @@ An easy-to-use app to help you to generate and save qr code.
 
    - **qrcode**: The qrcode library enables the generation of QR codes from textual data. It is commonly used to encode information like URLs, contact details, or other data into QR codes for use in various applications.
    - **Pillow (PIL Fork)**: Pillow, a fork of the Python Imaging Library (PIL), is a powerful library for image processing and manipulation. It allows you to open, modify, and save various image file formats, perform operations like resizing, cropping, and filtering, and create visual elements for use in graphical applications.
+
+## Usage 🎵
+
+## Demo 🎵
+
+## Techniques 🎵
