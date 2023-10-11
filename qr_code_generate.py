@@ -1,4 +1,5 @@
 import tkinter as tk
+from tkinter import font
 import qrcode
 from PIL import Image, ImageTk
 from io import BytesIO
@@ -48,10 +49,11 @@ window.resizable(False, False)
 # top panel contains an input bar
 top_panel = tk.Frame(window, bg='#330044')
 top_panel.pack(fill=tk.BOTH, expand=True)
-# top_panel.configure(bg='transparent')
 
-label = tk.Label(top_panel, text="Enter a link ...")
-label.pack(pady = 10)
+# Define a custom font with a specific font size
+font_label = font.Font(family="Consolas", size=16)
+label = tk.Label(top_panel, text="QR CODE GENERATOR", fg='#9665dd', bg='#330044', font=font_label)
+label.pack(pady = 20)
 
 entry = tk.Entry(top_panel)
 entry.pack(pady = 10)
@@ -63,7 +65,7 @@ generate_btn.pack(pady = 10)
 bottom_panel = tk.Frame(window, bg='#330044')
 bottom_panel.pack(fill=tk.BOTH, expand=True)
 
-qr_code_label = tk.Label(bottom_panel)
+qr_code_label = tk.Label(bottom_panel, bg='#330044')
 qr_code_label.pack(pady=10)
 
 # button to download the QR code image
