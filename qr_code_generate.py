@@ -29,10 +29,31 @@ def generate_qr_code():
 
     generate_qr_code.img = img  # store image
 
+# function to save qr code with name qr_code.img
 def save_qr_code():
+    if hasattr(generate_qr_code, 'img'):
+        img_byte_array = BytesIO()
+        generate_qr_code.img.save(img_byte_array, format = 'PNG')
+        with open('qr_code.png', 'wb') as f:
+            f.write(img_byte_array.getvalue())
 
 def main():
     window = tk.Tk()
+    window.title("QR Code Generator")
+    window.geometry("400x450")
+
+    # top panel contains an input bar
+    top_panel = tk.Frame(window)
+    top_panel.pack(fill = tk.BOTH, expand = True)
+
+    label = tk.Label(top_panel, text = "Enter a link ...")
+    label.pack(pady = 10)
+
+    entry = tk.Entry(top_panel)
+    entry.pack(pady = 10)
+
+    generate_button = tk.Button(top_panel, text = "Generate QR Code", command = generate_qr_code)
+    generate_button.pack(pady = 10)
 
 if __name__ == "__main__":
     main()
