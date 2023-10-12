@@ -27,24 +27,16 @@ def generate_qr_code():
     change_window_size(360, 450)
     center_window(window)
 
-    # middle panel contains QR Code
-    middle_panel = tk.Frame(window, bg=bgColor, width=360, height=200)
-    middle_panel.pack(fill=tk.BOTH, expand=True)
+    # # bottom panel contains QR Code
+    bottom_panel = tk.Frame(window, bg=bgColor, width=360, height=240)
+    bottom_panel.pack(fill=tk.BOTH, expand=True)
     
-    qr_code_label = tk.Label(middle_panel, bg=bgColor)
+    qr_code_label = tk.Label(bottom_panel, bg=bgColor)
     qr_code_label.pack(pady=10)
 
-    # # bottom panel contains QR Code
-    bottom_panel = tk.Frame(window, bg=bgColor)
-    bottom_panel.pack(fill=tk.BOTH, expand=True)
-
-
-    # qr_code_label = tk.Label(bottom_panel, bg=bgColor)
-    # qr_code_label.pack(pady=10)
-
-    # # button to download the QR code image
-    # download_btn = tk.Button(bottom_panel, text="Download QR Code", command=save_qr_code, fg="#d4c0f1", bg="#260033", borderwidth=5, relief="flat")
-    # download_btn.pack(pady=10)
+    # button to download the QR code image
+    download_btn = tk.Button(bottom_panel, text="Download QR Code", command=save_qr_code, fg="#d4c0f1", bg="#260033", activebackground="#d4c0f1", borderwidth=5, relief="flat")
+    download_btn.pack(pady=10)
 
     qr = qrcode.QRCode(
         version = 1,
@@ -75,6 +67,24 @@ def save_qr_code():
         with open('qr_code.png', 'wb') as f:
             f.write(img_byte_array.getvalue())
 
+        download_successfully()
+    
+success_panel = None
+
+def download_successfully():
+    global success_panel
+    success_panel = tk.Frame(window, bg=bgColor, width=360, height=240)
+    success_panel.pack(fill=tk.BOTH, expand=True)
+
+    notification_label = tk.Label(success_panel, text="Amazing", font=("Arial", 16))
+    notification_label.pack(padx=20, pady=20)
+    
+    close_success = tk.Button(success_panel, text="ok", command=close_success_panel)
+    close_success.pack(pady=10)
+
+def close_success_panel():
+    global success_panel
+    success_panel.place_forget()
 
 window = tk.Tk()
 window.title("QR Code Generator")
