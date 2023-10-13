@@ -5,10 +5,10 @@ import qrcode
 from PIL import Image, ImageTk
 from io import BytesIO
 
+# 💻 WINDOW 💻
 # function to change size
 def change_window_size(width, height):
     window.geometry(f"{width}x{height}")
-
 # function to set window in center of screen
 def center_window(window):   
     window.update_idletasks()
@@ -19,6 +19,48 @@ def center_window(window):
     x = (screen_width - window_width) // 2
     y = (screen_height - window_height) // 2
     window.geometry(f"{window_width}x{window_height}+{x}+{y}")
+# window
+window = tk.Tk()
+window.title("QR Code Generator")
+window.geometry("360x200")
+window.configure(bg='#330044')
+window.resizable(False, False)
+
+# some designs
+familyFont = font.Font(family='Consolas')
+bgColor = '#330044'
+
+
+# 🗻 TOP PANEL 🗻
+# top panel contains an input bar
+top_panel = tk.Frame(window, bg=bgColor)
+top_panel.pack(fill=tk.BOTH, expand=True)
+# define a custom font with a specific font size for label
+font_label = font.Font(family=familyFont, size=16)
+label = tk.Label(top_panel, text="QR CODE GENERATOR", fg='#9665dd', bg=bgColor, font=font_label)
+label.pack(pady=(20, 10))
+
+# the Entry content
+entry_text = tk.StringVar()
+
+# function to clear the placeholder and set the text color
+def clear_placeholder(event):
+    if entry_text.get() == "Enter a link":
+        entry_text.set("")
+        entry.config(fg="#4b0082")
+
+# function to restore the placeholder if the Entry is empty
+def restore_placeholder(event):
+    if not entry_text.get():
+        entry_text.set("Enter a link")
+        entry.config(fg="#4b0082")
+
+# input
+entry = tk.Entry(top_panel, textvariable=entry_text, borderwidth=5, relief="flat", width=40, fg="#8a51ab")
+entry.insert(0, "Enter a link")
+entry.bind("<FocusIn>", clear_placeholder)
+entry.bind("<FocusOut>", restore_placeholder)
+entry.pack(pady=(10, 20))
 
 # function to generate QR codes 
 def generate_qr_code():
@@ -27,7 +69,7 @@ def generate_qr_code():
     change_window_size(360, 450)
     center_window(window)
 
-    # # bottom panel contains QR Code
+    # bottom panel contains QR Code
     bottom_panel = tk.Frame(window, bg=bgColor, width=360, height=240)
     bottom_panel.pack(fill=tk.BOTH, expand=True)
     bottom_panel.place(x=0, y=165, relwidth=1, relheight=1)
@@ -59,7 +101,12 @@ def generate_qr_code():
     qr_code_label.image = photo
 
     generate_qr_code.img = img  # store image
+    
+# generate-btn
+generate_btn = tk.Button(top_panel, text="Generate QR Code", command=generate_qr_code, bg='#9665dd', fg=bgColor, borderwidth=5, relief="flat", activebackground=bgColor)
+generate_btn.pack(pady=(10, 0))
 
+# 🌪 BOTTOM PANEL 🌪
 # function to save qr code with name qr_code.img
 def save_qr_code():
     if hasattr(generate_qr_code, 'img'):
@@ -70,9 +117,9 @@ def save_qr_code():
 
         download_successfully()
 
-# function to notify download successfully
 success_panel = None
 
+# function to notify download successfully
 def download_successfully():
     global success_panel
     success_panel = tk.Frame(window, bg=bgColor, width=360, height=240)
@@ -88,67 +135,6 @@ def download_successfully():
 def close_success_panel():
     global success_panel
     success_panel.place_forget()
-
-# function to ctrl V and ctrl C 
-def copy_text(event):
-    if entry.selection_present():
-        window.clipboard_clear()
-        window.clipboard_append(entry.selection_get())
-
-def paste_text(event):
-    text_to_paste = window.clipboard_get()
-    entry.insert(tk.INSERT, text_to_paste)
-
-
-
-window = tk.Tk()
-window.title("QR Code Generator")
-window.geometry("360x200")
-window.configure(bg='#330044')
-window.resizable(False, False)
-
-# some designs
-familyFont = font.Font(family='Consolas')
-bgColor = '#330044'
-
-# top panel contains an input bar
-top_panel = tk.Frame(window, bg=bgColor)
-top_panel.pack(fill=tk.BOTH, expand=True)
-
-# define a custom font with a specific font size for label
-font_label = font.Font(family=familyFont, size=16)
-label = tk.Label(top_panel, text="QR CODE GENERATOR", fg='#9665dd', bg=bgColor, font=font_label)
-label.pack(pady=(20, 10))
-
-# the Entry content
-entry_text = tk.StringVar()
-
-# function to clear the placeholder and set the text color
-def clear_placeholder(event):
-    if entry_text.get() == "Enter a link":
-        entry_text.set("")
-        entry.config(fg="#4b0082")
-
-# function to restore the placeholder if the Entry is empty
-def restore_placeholder(event):
-    if not entry_text.get():
-        entry_text.set("Enter a link")
-        entry.config(fg="#4b0082")
-
-# input
-entry = tk.Entry(top_panel, textvariable=entry_text, borderwidth=5, relief="flat", width=40, fg="#8a51ab")
-entry.insert(0, "Enter a link")
-entry.bind("<FocusIn>", clear_placeholder)
-entry.bind("<FocusOut>", restore_placeholder)
-entry.pack(pady=(10, 20))
-# Bind Ctrl+C to copy_text function
-entry.bind("<Control-c>", copy_text)
-# Bind Ctrl+V to paste_text function
-entry.bind("<Control-v>", paste_text)
-
-# generate-btn
-generate_btn = tk.Button(top_panel, text="Generate QR Code", command=generate_qr_code, bg='#9665dd', fg=bgColor, borderwidth=5, relief="flat", activebackground=bgColor)
-generate_btn.pack(pady=(10, 0))
 
 center_window(window)
 
