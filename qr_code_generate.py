@@ -30,6 +30,7 @@ def generate_qr_code():
     # # bottom panel contains QR Code
     bottom_panel = tk.Frame(window, bg=bgColor, width=360, height=240)
     bottom_panel.pack(fill=tk.BOTH, expand=True)
+    bottom_panel.place(x=0, y=165, relwidth=1, relheight=1)
     
     qr_code_label = tk.Label(bottom_panel, bg=bgColor)
     qr_code_label.pack(pady=10)
@@ -68,23 +69,37 @@ def save_qr_code():
             f.write(img_byte_array.getvalue())
 
         download_successfully()
-    
+
+# function to notify download successfully
 success_panel = None
 
 def download_successfully():
     global success_panel
     success_panel = tk.Frame(window, bg=bgColor, width=360, height=240)
     success_panel.pack(fill=tk.BOTH, expand=True)
+    success_panel.place(x=0, y=175, relwidth=1, relheight=1)
 
-    notification_label = tk.Label(success_panel, text="Amazing", font=("Arial", 16))
+    notification_label = tk.Label(success_panel, text="Your QR Code has been downloaded successfully. 🎉🎉", width=20, height=5, fg="#d4c0f1", bg="#260033", font=(familyFont, 16), wraplength=200)
     notification_label.pack(padx=20, pady=20)
     
-    close_success = tk.Button(success_panel, text="ok", command=close_success_panel)
+    close_success = tk.Button(success_panel, text="Return to QR Code", command=close_success_panel, fg="#d4c0f1", bg="#260033", activebackground="#d4c0f1", borderwidth=5, relief="flat")
     close_success.pack(pady=10)
 
 def close_success_panel():
     global success_panel
     success_panel.place_forget()
+
+# function to ctrl V and ctrl C 
+def copy_text(event):
+    if entry.selection_present():
+        window.clipboard_clear()
+        window.clipboard_append(entry.selection_get())
+
+def paste_text(event):
+    text_to_paste = window.clipboard_get()
+    entry.insert(tk.INSERT, text_to_paste)
+
+
 
 window = tk.Tk()
 window.title("QR Code Generator")
@@ -126,6 +141,10 @@ entry.insert(0, "Enter a link")
 entry.bind("<FocusIn>", clear_placeholder)
 entry.bind("<FocusOut>", restore_placeholder)
 entry.pack(pady=(10, 20))
+# Bind Ctrl+C to copy_text function
+entry.bind("<Control-c>", copy_text)
+# Bind Ctrl+V to paste_text function
+entry.bind("<Control-v>", paste_text)
 
 # generate-btn
 generate_btn = tk.Button(top_panel, text="Generate QR Code", command=generate_qr_code, bg='#9665dd', fg=bgColor, borderwidth=5, relief="flat", activebackground=bgColor)
@@ -135,6 +154,3 @@ center_window(window)
 
 # start the app
 window.mainloop()
-
-# if __name__ == "__main__":
-#     main()
