@@ -9,12 +9,12 @@ An easy-to-use app to help you to generate and save qr code.
 - [Simple QR Code Generation](#simple-qr-code-generation)
 - [QR Code Generator](#qr-code-generator)
 - [Installation](#installation)
-<!-- - [Demo](#demo) -->
 - [Contributing](#contributing)
 - [License](#license)
 
 
 ## Simple QR Code Generation
+You can use the following Python code to generate a QR code from your text or data. Replace 'https://www.google.com/' with the data you want to encode in the QR code.
 
    ```python
    import qrcode
@@ -22,6 +22,7 @@ An easy-to-use app to help you to generate and save qr code.
    img = qrcode.make('https://www.google.com/')
    img.save('qr_code.png')
    ```
+The code above generates a QR code with the text 'https://www.google.com/' and saves it as 'qr_code.png'. This is just a simple illustration to help you get started with QR code generation. You can customize the data and filename as per your requirements.
 
 ## QR Code Generator
 **1. Run the application:** Double-click the application file or execute the Python script to launch the QR Code Generator. The GUI will appear.
@@ -43,6 +44,7 @@ An easy-to-use app to help you to generate and save qr code.
 **7. Notification:** There will appear a message if you download QR Code successfully.
 
 **8. Here's a screenshot of the QR Code Generator GUI:**
+
 ![alt text](https://github.com/nguyenthiyenchi/qr-code-app/blob/main/images/qrcode.gif)
 
 ## Installation
@@ -69,9 +71,9 @@ An easy-to-use app to help you to generate and save qr code.
    - **Pillow (PIL Fork)**: Pillow, a fork of the Python Imaging Library (PIL), is a powerful library for image processing and manipulation. It allows you to open, modify, and save various image file formats, perform operations like resizing, cropping, and filtering, and create visual elements for use in graphical applications.
 
 
+## Troubleshooting
 
-## Usage
+If you encounter any issues while using the QR Code Generator, please refer to the [Troubleshooting](#troubleshooting) section for solutions to common problems.
 
-## Demo
-
-## Techniques
+## License
+This project is licensed under the Nguyen Thi Yen Chi License.
