@@ -42,8 +42,8 @@ An easy-to-use app to help you to generate and save qr code.
 
 **7. Notification:** There will appear a message if you download QR Code successfully.
 
-**Here's a screenshot of the QR Code Generator GUI:**
-
+**8. Here's a screenshot of the QR Code Generator GUI:**
+![alt text](https://github.com/nguyenthiyenchi/qr-code-app/blob/main/images/qrcode.gif)
 
 ## Installation
 
