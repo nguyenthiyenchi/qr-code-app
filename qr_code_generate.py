@@ -1,5 +1,5 @@
 import tkinter as tk
-from tkinter import font
+from tkinter import font, filedialog
 import tkinter.font as font
 import qrcode
 from PIL import Image, ImageTk
@@ -109,11 +109,17 @@ generate_btn.pack(pady=(10, 0))
 # 🌪 BOTTOM PANEL 🌪
 # function to save qr code with name qr_code.img
 def save_qr_code():
-    if hasattr(generate_qr_code, 'img'):
-        img_byte_array = BytesIO()
-        generate_qr_code.img.save(img_byte_array, format='PNG')
-        with open('qr_code.png', 'wb') as f:
-            f.write(img_byte_array.getvalue())
+    file_path = filedialog.asksaveasfilename(defaultextension=".png", filetypes=[("PNG files", "*.png"), ("All files", "*.*")])
+    if file_path:
+        # Check if the generate_qr_code function has generated an image
+        if hasattr(generate_qr_code, 'img'):
+            img_byte_array = BytesIO()
+            generate_qr_code.img.save(img_byte_array, format='PNG')
+            with open(file_path, 'wb') as f:
+                f.write(img_byte_array.getvalue())
+            print(f"Image saved to {file_path}")
+        else:
+            print("No image to save. Generate a QR code first.")
 
         download_successfully()
 
