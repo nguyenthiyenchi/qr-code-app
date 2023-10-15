@@ -26,10 +26,9 @@ window.geometry("360x200")
 window.configure(bg='#330044')
 window.resizable(False, False)
 
-# some designs
+# 🎆 FONT & COLOR 🎆
 familyFont = font.Font(family='Consolas')
 bgColor = '#330044'
-
 
 # 🗻 TOP PANEL 🗻
 # top panel contains an input bar
@@ -111,7 +110,7 @@ generate_btn.pack(pady=(10, 0))
 def save_qr_code():
     file_path = filedialog.asksaveasfilename(defaultextension=".png", filetypes=[("PNG files", "*.png"), ("All files", "*.*")])
     if file_path:
-        # Check if the generate_qr_code function has generated an image
+        # check if the generate_qr_code function has generated an image
         if hasattr(generate_qr_code, 'img'):
             img_byte_array = BytesIO()
             generate_qr_code.img.save(img_byte_array, format='PNG')
